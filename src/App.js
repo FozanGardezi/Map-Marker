@@ -43,13 +43,8 @@ const LocationMarker = () => {
     }else{
       temp[markerIndex].icon = iconList[colorIndex + 1]
     };
-    setPosition((prev) =>  prev =temp);
+    setPosition([...temp]);
   }
-
-  // useEffect(() => {
-  //   console.log(position)
-  // },[position])
-  console.log(position)
   return (
     <>
       {
@@ -70,20 +65,17 @@ const LocationMarker = () => {
 const App = () => {
   return (
     <div className="App">
-      <div id ="map">
+      <div id ="map" style={{height:"400px"}}>
         <MapContainer center={[51.505, -0.09]} zoom={13} style={{height:"100%"}} >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {/* {markers.map((marker) => {
-            <Marker>
-              <popup>Hello</popup>
-            </Marker>
-          })} */}
-
           <LocationMarker />
         </MapContainer>
+        <div>
+          
+        </div>
       </div>
     </div>
   );
