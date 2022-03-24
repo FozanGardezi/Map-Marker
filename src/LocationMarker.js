@@ -67,7 +67,7 @@ const LocationMarker = ({markers}) => {
           <Marker key={`marker-${i}`} position={[marker.lat,marker.lng]} icon={marker.icon}  eventHandlers = {{ click: () => {onMarkerClick(marker)}}}>
             <Popup>
               <span>
-                A pretty CSS3 popup. <br /> Easily customizable.
+                Click to change color
               </span>
             </Popup>
           </Marker>
