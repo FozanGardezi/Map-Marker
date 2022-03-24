@@ -3,8 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
 import * as L from "leaflet";
+import AddLatLong from './AddLatLong';
 
-const LocationMarker = () => {
+const LocationMarker = ({markers}) => {
   const LeafIcon = L.Icon.extend({
     options: {}
   });
@@ -14,6 +15,7 @@ const LocationMarker = () => {
     new LeafIcon({iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png"}),
     new LeafIcon({iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png"})
   ]
+  
   const [position, setPosition] = useState([
     {
       lat: 51.505, 
@@ -21,6 +23,21 @@ const LocationMarker = () => {
       icon:iconList[0],
     }
   ])
+  useEffect(() => {
+    setPosition([...JSON.parse(localStorage.getItem("position"))])
+    if(markers !== undefined && markers !== null){
+      let temp = position;
+      markers.map((mark) => {
+        temp.push({lat:Number(mark.lat),lng:Number(mark.lng),icon: mark.icon = iconList[mark.icon]})
+      })
+      setPosition([...temp]);
+    }
+  })
+
+  useEffect(() => {
+    localStorage.setItem("position",JSON.stringify(position))
+  },[position])
+
   const map = useMapEvents({
     click(e) {
       console.log(e)
@@ -28,9 +45,7 @@ const LocationMarker = () => {
       setPosition([...position,{lat: e.latlng.lat,lng: e.latlng.lng, icon:iconList[0]}])
     },
   })
-
   const onMarkerClick = (marker) => {
-    console.log("heejjasc")
     const markerIndex = position.findIndex((pos) =>{
       return pos.lat == marker.lat && pos.lng == marker.lng;
     });
@@ -45,6 +60,8 @@ const LocationMarker = () => {
     };
     setPosition([...temp]);
   }
+
+
   return (
     <>
       {
@@ -63,6 +80,15 @@ const LocationMarker = () => {
 }
 
 const App = () => {
+  const [batchMarkers, setBatchMarkers] = useState([])
+  const handleSubmit = (data) => {
+    setBatchMarkers(data)
+    // e.preventDefault();
+    // let tempMarkers = [{lat: e.target.lat.value,lng: e.target.lng.value,icon: e.target.color.value}]
+    // setBatchMarkers(tempMarkers)
+    // console.log(e.target.lat.value,e.target.lng.value,e.target.color.value);
+  }
+  console.log(batchMarkers)
   return (
     <div className="App">
       <div id ="map" style={{height:"400px"}}>
@@ -71,10 +97,11 @@ const App = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <LocationMarker />
+          <LocationMarker markers={batchMarkers} />
         </MapContainer>
         <div>
-          
+          <h3>Enter Batch Cordinates</h3>
+          <AddLatLong batchMarkers={batchMarkers} handleSubmit={handleSubmit} />
         </div>
       </div>
     </div>
