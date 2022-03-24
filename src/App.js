@@ -82,7 +82,7 @@ const LocationMarker = ({markers}) => {
 const App = () => {
   const [batchMarkers, setBatchMarkers] = useState([])
   const handleSubmit = (data) => {
-    setBatchMarkers(data)
+    setBatchMarkers([...data])
     // e.preventDefault();
     // let tempMarkers = [{lat: e.target.lat.value,lng: e.target.lng.value,icon: e.target.color.value}]
     // setBatchMarkers(tempMarkers)
@@ -101,7 +101,7 @@ const App = () => {
         </MapContainer>
         <div>
           <h3>Enter Batch Cordinates</h3>
-          <AddLatLong batchMarkers={batchMarkers} handleSubmit={handleSubmit} />
+          <AddLatLong batchMarkers={batchMarkers} handleSubmit={handleSubmit} setBatchMarkers={setBatchMarkers} />
         </div>
       </div>
     </div>
