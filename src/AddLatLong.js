@@ -5,7 +5,6 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 
 const AddLatLong = ({batchMarkers, handleSubmit}) => {
-    const [value,setValue]=useState('');
     const handleSelect=(e)=>{
         e.preventDefault();
         let tempMarkers = [{lat: e.target.lat.value,lng: e.target.lng.value,icon: e.target.color.value}]
