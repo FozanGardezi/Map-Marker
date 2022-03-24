@@ -24,7 +24,7 @@ const LocationMarker = ({markers}) => {
     }
   ])
   useEffect(() => {
-    // setPosition([...JSON.parse(localStorage.getItem("position"))])
+    setPosition([...JSON.parse(localStorage.getItem("position"))])
     if(markers !== undefined && markers !== null){
       let temp = position;
       markers.map((mark) => {
@@ -83,10 +83,6 @@ const App = () => {
   const [batchMarkers, setBatchMarkers] = useState([])
   const handleSubmit = (data) => {
     setBatchMarkers([...data])
-    // e.preventDefault();
-    // let tempMarkers = [{lat: e.target.lat.value,lng: e.target.lng.value,icon: e.target.color.value}]
-    // setBatchMarkers(tempMarkers)
-    // console.log(e.target.lat.value,e.target.lng.value,e.target.color.value);
   }
   console.log(batchMarkers)
   return (

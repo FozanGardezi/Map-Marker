@@ -8,9 +8,7 @@ const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
     const [markers, setMarkers] = useState([{ lat: "", lng: "", icon: "0" }]);
     const handleSelect=(e)=>{
         e.preventDefault();
-        // let tempMarkers = [{lat: e.target.lat.value,lng: e.target.lng.value,icon: e.target.color.value}]
         handleSubmit(markers)
-        // console.log(e.target.lat.value,e.target.lng.value,e.target.color.value);
     }
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
@@ -51,7 +49,6 @@ const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
                 })}
                 <input type="submit" value="Submit" />
             </form>
-            {/* <button type="button" onClick={{}}>Add Another Marker</button> */}
         </div>
     );
     
