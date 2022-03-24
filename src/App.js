@@ -1,5 +1,4 @@
 import React, {useState,useEffect} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
 import * as L from "leaflet";
