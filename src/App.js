@@ -23,7 +23,6 @@ const LocationMarker = ({markers}) => {
     }
   ])
   useEffect(() => {
-    setPosition([...JSON.parse(localStorage.getItem("position"))])
     if(markers !== undefined && markers !== null){
       let temp = position;
       markers.map((mark) => {
