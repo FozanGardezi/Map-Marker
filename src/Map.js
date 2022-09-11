@@ -8,7 +8,6 @@ const Map = () => {
     const handleSubmit = (data) => {
       setBatchMarkers([...data])
     }
-    console.log(batchMarkers)
     return (
       <div className="App">
         <div id ="map" style={{height:"400px"}}>
