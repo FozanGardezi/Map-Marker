@@ -30,9 +30,9 @@ const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
                 {markers.map((mark,i) => {
                     return (
                         <>
-                            <input required type="number" step="any" name="lat" onChange={e => handleInputChange(e, i)}/>
-                            <input required type="number" step="any" name="lng" onChange={e => handleInputChange(e, i)}/>
-                            <select required name="cars" id="cars" name="icon" onChange={e => handleInputChange(e, i)}>
+                            <input required type="number" placeholder="Enter Latitude" step="any" name="lat" onChange={e => handleInputChange(e, i)}/>
+                            <input required type="number" placeholder="Enter Longitude" step="any" name="lng" onChange={e => handleInputChange(e, i)}/>
+                            <select required name="icon" id="icon" onChange={e => handleInputChange(e, i)}>
                                 <option value="0">Red</option>
                                 <option value="1">Blue</option>
                                 <option value="2">Green</option>
