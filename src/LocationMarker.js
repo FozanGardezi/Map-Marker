@@ -2,6 +2,8 @@ import React, {useState, useEffect, useRef, useMemo} from 'react';
 import './App.css';
 import { Marker, Popup, useMapEvents } from 'react-leaflet'
 import * as L from "leaflet";
+import { AddMarker } from './Actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 const LocationMarker = ({markers}) => {
   const LeafIcon = L.Icon.extend({
@@ -13,6 +15,9 @@ const LocationMarker = ({markers}) => {
     new LeafIcon({iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png"}),
     new LeafIcon({iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png"})
   ]
+
+  const markerState = useSelector(state => state.marker);
+  const  dispatch = useDispatch()
   // const [draggable, setDraggable] = useState(true)
 
   // marker reference
@@ -73,6 +78,7 @@ const LocationMarker = ({markers}) => {
   const map = useMapEvents({
     click(e) {
       e.latlng.wrap();
+      dispatch(AddMarker({lat: e.latlng.lat,lng: e.latlng.lng, icon:iconList[0]}))
       setPosition([...position,{lat: e.latlng.lat,lng: e.latlng.lng, icon:iconList[0]}])
     }
   })
@@ -93,8 +99,8 @@ const LocationMarker = ({markers}) => {
     };
     setPosition([...temp]);
   }
+  
   // eventHandlers={{ click: () => {eventHandlers(marker.icon.options.iconUrl)}}}
-
   return (
     <>
       {

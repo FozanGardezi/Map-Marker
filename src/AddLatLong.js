@@ -1,14 +1,19 @@
 import React,{useState}  from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { AddMarker } from "./Actions";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 
 
 const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
+    const marker = useSelector(marker =>  marker.markers)
+    const dispatch = useDispatch();
     const [markers, setMarkers] = useState([{ lat: "", lng: "", icon: "0" }]);
     const handleSelect=(e)=>{
         e.preventDefault();
         handleSubmit(markers)
+        // dispatch(AddMarker(markers))
     }
     const handleInputChange = (e, index) => {
         const { name, value } = e.target;
@@ -26,7 +31,12 @@ const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
     }
     return (
         <div>
-            <form onSubmit={handleSelect}>
+            <form onSubmit={
+                () => {
+                    dispatch(AddMarker())
+                    
+                }}
+            >
                 {markers.map((mark,i) => {
                     return (
                         <>

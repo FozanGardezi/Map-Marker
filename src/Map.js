@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet'
 import AddLatLong from './AddLatLong';
 import LocationMarker from './LocationMarker';
+import { useSelector } from 'react-redux';
 
 function useLocalStorage(key) {
   const [state, setState] = useState(localStorage.getItem(key));
@@ -13,6 +14,7 @@ function useLocalStorage(key) {
 }
 
 const Map = () => {
+  // const markers = useSelector(marker =>  marker.markers)
   const handleSubmit = (data) => {
     setBatchMarkers([...data])
   }
