@@ -6,6 +6,8 @@ const markerReducer = (state = [{
     switch(action.type){
         case 'add':
             return [...state, action.payload];
+        case 'remove':
+            return state.filter(state => state == action.payload)
         default:
             return state;
     }
