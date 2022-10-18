@@ -8,10 +8,34 @@ const LocationMarker = ({markers}) => {
     options: {}
   });
   const iconList = [
-    new LeafIcon({iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png"}),
-    new LeafIcon({iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png"}),
-    new LeafIcon({iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png"}),
-    new LeafIcon({iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png"})
+    new LeafIcon({
+      iconSize: [25, 41],
+      iconAnchor: [10, 41],
+      popupAnchor: [2, -40],
+      iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png"
+    }),
+    new LeafIcon({
+      iconSize: [25, 41],
+      iconAnchor: [10, 41],
+      popupAnchor: [2, -40],
+      iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png"
+    }),
+    new LeafIcon({
+      iconSize: [25, 41],
+      iconAnchor: [10, 41],
+      popupAnchor: [2, -40],
+      iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png"
+    }),
+    new LeafIcon({
+      iconSize: [25, 41],
+      iconAnchor: [10, 41],
+      popupAnchor: [2, -40],
+      iconUrl:"https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png",
+      shadowUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-shadow.png"
+    })
   ]
   // const [draggable, setDraggable] = useState(true)
 
@@ -39,19 +63,21 @@ const LocationMarker = ({markers}) => {
     }]
   )
 
-  useEffect(() => {
-    let localData = markers
-    if(localData && localData.length > 0){
-      localData = localData.map(location => {        
-       let icon = iconList.find(ic =>  ic.options.iconUrl == location.icon.options.iconUrl)
-       location.icon = icon;
-       return location
-      })
-      localStorage.setItem("position",JSON.stringify([...localData]))
-      setPosition([...localData])
-    }
-  },[])
+  // save local storage data in   local storage
+  // useEffect(() => {
+  //   let localData = markers
+  //   if(localData && localData.length > 0){
+  //     localData = localData.map(location => {        
+  //      let icon = iconList.find(ic =>  ic.options.iconUrl == location.icon.options.iconUrl)
+  //      location.icon = icon;
+  //      return location
+  //     })
+  //     localStorage.setItem("position",JSON.stringify([...localData]))
+  //     setPosition([...localData])
+  //   }
+  // },[])
   
+  //when we get batch markers from the parent component
   useEffect(() => {
     if(markers && markers.length > 0){
       let temp = position;
