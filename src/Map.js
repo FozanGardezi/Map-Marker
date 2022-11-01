@@ -1,7 +1,8 @@
 import React, {useState,useEffect} from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet'
-import AddLatLong from './AddLatLong';
+import AddLatLong from './Menu/AddLatLong';
 import LocationMarker from './LocationMarker';
+import MenuTabs from './Menu/Tabs';
 
 function useLocalStorage(key) {
   const [state, setState] = useState(localStorage.getItem(key));
@@ -22,8 +23,13 @@ const Map = () => {
     //   setBatchMarkers(...JSON.parse(item))
     // },[])
     return (
-      <div className="App">
-        <div id ="map" style={{height:"600px"}}>
+      <div style={{display:"flex", flexDirection:"row"}} className='App'>
+        <div style={{textAlign:"center", width:"20%"}}>
+          <MenuTabs />
+          {/* <h3>Enter Batch Cordinates</h3>
+          <AddLatLong batchMarkers={batchMarkers} handleSubmit={handleSubmit} setBatchMarkers={setBatchMarkers} /> */}
+        </div>
+        <div id ="map" style={{height:"1200px", width:"80%"}} >
           <MapContainer center={[51.505, -0.09]} zoom={13} style={{height:"100%"}} >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -31,10 +37,6 @@ const Map = () => {
             />
             <LocationMarker markers={batchMarkers} />
           </MapContainer>
-          <div>
-            <h3>Enter Batch Cordinates</h3>
-            <AddLatLong batchMarkers={batchMarkers} handleSubmit={handleSubmit} setBatchMarkers={setBatchMarkers} />
-          </div>
         </div>
       </div>
     );

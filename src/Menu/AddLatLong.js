@@ -1,8 +1,7 @@
 import React,{useState}  from "react";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Dropdown from 'react-bootstrap/Dropdown'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { AddLatLongContainer, AddLatLongForm, Input, Select } from "./AddLatLongStyled";
 
 const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
     const [markers, setMarkers] = useState([{ lat: "", lng: "", icon: "0" }]);
@@ -29,7 +28,7 @@ const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
             <form onSubmit={handleSelect}>
                 {markers.map((mark,i) => {
                     return (
-                        <>
+                        <div>
                             <input required type="number" placeholder="Enter Latitude" step="any" name="lat" onChange={e => handleInputChange(e, i)}/>
                             <input required type="number" placeholder="Enter Longitude" step="any" name="lng" onChange={e => handleInputChange(e, i)}/>
                             <select required name="icon" id="icon" onChange={e => handleInputChange(e, i)}>
@@ -37,17 +36,19 @@ const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
                                 <option value="1">Blue</option>
                                 <option value="2">Green</option>
                                 <option value="3">Yellow</option>
-                            </select>
+                            </select>&nbsp;&nbsp;
+                            <input type="file"></input>
+                            {markers.length !== 1 && <FontAwesomeIcon icon={faTimes} onClick={() => handleRemoveClick(i)} color="red"/>}&nbsp;&nbsp;
+                                {/* className="mr10 fa fa-time danger"
+                                onClick={() => handleRemoveClick(i)}>Remove</i>} */}
+                            {markers.length - 1 === i && <FontAwesomeIcon icon={faPlus} onClick={addMore} color="green" />}
+                            {/* className="fa fa-plus success" onClick={addMore}>Add</i>} */}
                             <div className="btn-box">
-                                {markers.length !== 1 && <button
-                                    className="mr10"
-                                    onClick={() => handleRemoveClick(i)}>Remove</button>}
-                                {markers.length - 1 === i && <button onClick={addMore}>Add</button>}
                             </div>
-                        </>
+                        </div>
                     )
                 })}
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Add" />
             </form>
         </div>
     );
