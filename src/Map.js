@@ -15,7 +15,8 @@ function useLocalStorage(key) {
 
 const Map = () => {
   const handleSubmit = (data) => {
-    setBatchMarkers([...data])
+    console.log(data)
+    // setBatchMarkers([...data])
   }
   // const [item, setItem] = useLocalStorage("position");
   const [batchMarkers, setBatchMarkers] = useState()
@@ -25,7 +26,7 @@ const Map = () => {
     return (
       <div style={{display:"flex", flexDirection:"row"}} className='App'>
         <div style={{textAlign:"center", width:"20%"}}>
-          <MenuTabs />
+          <MenuTabs handleSubmit={handleSubmit} />
           {/* <h3>Enter Batch Cordinates</h3>
           <AddLatLong batchMarkers={batchMarkers} handleSubmit={handleSubmit} setBatchMarkers={setBatchMarkers} /> */}
         </div>

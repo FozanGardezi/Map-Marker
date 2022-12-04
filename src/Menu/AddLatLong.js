@@ -5,8 +5,29 @@ import { AddLatLongContainer, AddLatLongForm, Input, Select } from "./AddLatLong
 
 const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
     const [markers, setMarkers] = useState([{ lat: "", lng: "", icon: "0" }]);
+    const [selectedFile, setSelectedFile] = useState();
+	const [isFilePicked, setIsFilePicked] = useState(false);
+
+	const changeHandler = (event) => {
+        console.log(event.target.files[0])
+		setSelectedFile(event.target.files[0]);
+		setIsFilePicked(true);
+	};
+    const updateDocument = (e) => {
+        let base64Img = e.target.files[0]
+        let name = e.target.files[0].name
+        let _this = this
+        var reader = new FileReader()
+        reader.readAsDataURL(base64Img)
+        reader.onload = function (e) {
+            let imageInBase64 = reader.result
+            imageInBase64 = imageInBase64.substring(imageInBase64.indexOf(',') + 1)
+            _this.setState({ document: imageInBase64, fileName: name })
+        }
+    }
     const handleSelect=(e)=>{
         e.preventDefault();
+        const fileList = e.target.files;
         handleSubmit(markers)
     }
     const handleInputChange = (e, index) => {
@@ -37,7 +58,7 @@ const AddLatLong = ({batchMarkers, handleSubmit, setBatchMarkers}) => {
                                 <option value="2">Green</option>
                                 <option value="3">Yellow</option>
                             </select>&nbsp;&nbsp;
-                            <input type="file"></input>
+                            <input type="file" onChange={changeHandler}></input>
                             {markers.length !== 1 && <FontAwesomeIcon icon={faTimes} onClick={() => handleRemoveClick(i)} color="red"/>}&nbsp;&nbsp;
                                 {/* className="mr10 fa fa-time danger"
                                 onClick={() => handleRemoveClick(i)}>Remove</i>} */}
